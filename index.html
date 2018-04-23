@@ -15,7 +15,7 @@ found in the LICENSE file.
   // ServiceWorker for PWA
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker
-      .register('./sw.js')
+      .register('/audioworklet-serviceworker/sw.js')
       .then(function() { console.log('Service Worker Registered'); });
   }
     

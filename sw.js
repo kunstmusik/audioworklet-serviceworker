@@ -1,8 +1,8 @@
-var cacheName = 'audioworklet-serviceworker';
+var cacheName = 'audioworklet-serviceworker-1';
 var filesToCache = [
-  '/', 
-  '/index.html',
-  '/noise-generator.js',
+  '/audioworklet-serviceworker/', 
+  '/audioworklet-serviceworker/index.html',
+  '/audioworklet-serviceworker/noise-generator.js',
 
 ];
 
