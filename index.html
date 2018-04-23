@@ -1,0 +1,45 @@
+<!-- 
+Copyright (c) 2017 The Chromium Authors. All rights reserved.
+Use of this source code is governed by a BSD-style license that can be
+found in the LICENSE file.
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script>
+
+  // ServiceWorker for PWA
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+      .register('./sw.js')
+      .then(function() { console.log('Service Worker Registered'); });
+  }
+    
+
+    function runDemo() {
+      const context = new AudioContext();
+      context.audioWorklet.addModule('noise-generator.js').then(() => {
+        let modulator = new OscillatorNode(context);
+        let modGain = new GainNode(context);
+        let noiseGenerator = new AudioWorkletNode(context, 'noise-generator');
+        noiseGenerator.connect(context.destination);
+
+        // Connect the oscillator to 'amplitude' AudioParam.
+        let paramAmp = noiseGenerator.parameters.get('amplitude');
+        modulator.connect(modGain).connect(paramAmp);
+
+        modulator.frequency.value = 0.5;
+        modGain.gain.value = 0.75;
+        modulator.start();
+      });
+    }
+
+
+    runDemo();
+    </script>
+  </body>
+</html>
